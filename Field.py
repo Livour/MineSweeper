@@ -21,7 +21,7 @@ class Field:
             self.matrix.append([])
             for j in range(self.columns):
                 current_logic = logic_matrix[i][j]
-                value_to_assign = "💣" if current_logic == -1 else current_logic
+                value_to_assign = Cell.MINE if current_logic == -1 else current_logic
                 cell = Cell(self.canvas, i, j, self.cell_size, value_to_assign, self, self.rows, self.columns)
                 self.matrix[i].append(cell)
 
