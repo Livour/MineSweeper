@@ -31,14 +31,14 @@ class Cell:
         canvas.tag_bind(self.text, "<Button-1>", left_click_handler)
 
     def on_click(self, event, i, j):
-        if self.clicked:
+        if self.clicked or self.is_flagged:
             return
 
         if self.value == 0:
             self.click_adjacent_zeros(i, j)
-        else:
-            self.canvas_right_click()
+            return
 
+        self.canvas_right_click()
         if self.value == self.MINE:
             self.field.game_over()
 
@@ -65,8 +65,8 @@ class Cell:
             self.canvas.itemconfigure(self.text, fill="red", text=self.FLAG)
 
     def click_adjacent_zeros(self, i, j):
-        adjacent = [(i - 1, j), (i, j + 1), (i + 1, j), (i, j - 1)]
-        diagonal = [(i - 1, j - 1), (i - 1, j + 1), (i + 1, j + 1), (i + 1, j - 1)]
+        adjacent = [(i - 1, j), (i, j + 1), (i + 1, j), (i, j - 1), (i - 1, j - 1), (i - 1, j + 1), (i + 1, j + 1),
+                    (i + 1, j - 1)]
 
         if self.checked:
             return
@@ -80,10 +80,3 @@ class Cell:
         for neighbor_i, neighbor_j in adjacent:
             if is_valid(neighbor_i, neighbor_j, self.rows, self.columns):
                 self.field.matrix[neighbor_i][neighbor_j].click_adjacent_zeros(neighbor_i, neighbor_j)
-
-        # Finally check and click the diagonal cells
-        for diagonal_i, diagonal_j in diagonal:
-            if is_valid(diagonal_i, diagonal_j, self.rows, self.columns):
-                current_diagonal = self.field.matrix[diagonal_i][diagonal_j]
-                current_diagonal.canvas_right_click()
-                current_diagonal.checked = True
