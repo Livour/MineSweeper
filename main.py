@@ -10,13 +10,19 @@ ROWS = int(HEIGHT / CELL)
 COLUMNS = int(WIDTH / CELL)
 
 
+def on_key_press(event, field: Field):
+    if event.keysym == "Return":
+        field.new_game()
+
+
 def main():
     frame = Tk()
     canvas = Canvas(frame, width=WIDTH, height=HEIGHT)
     canvas.pack()
 
-    Field(canvas, ROWS, COLUMNS, CELL)
+    field = Field(canvas, ROWS, COLUMNS, CELL)
 
+    frame.bind("<Key>", lambda event: on_key_press(event, field))
     frame.mainloop()
 
 

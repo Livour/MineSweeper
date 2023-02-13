@@ -38,6 +38,9 @@ class Cell:
         else:
             self.canvas_right_click()
 
+        if self.value == "💣":
+            self.field.game_over()
+
         self.clicked = True
 
     def canvas_right_click(self):
