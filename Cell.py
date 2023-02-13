@@ -5,6 +5,7 @@ from field_util import is_valid
 
 class Cell:
     FLAG = "🏴"
+    MINE = "💣"
 
     def __init__(self, canvas: Canvas, row, column, cell_size, value, matrix, rows, columns):
         self.clicked = False
@@ -38,18 +39,20 @@ class Cell:
         else:
             self.canvas_right_click()
 
-        if self.value == "💣":
+        if self.value == self.MINE:
             self.field.game_over()
 
-        self.clicked = True
-
     def canvas_right_click(self):
-        if self.value == "💣":
+        if self.is_flagged:
+            return
+
+        if self.value == self.MINE:
             self.canvas.itemconfigure(self.rectangle, fill="red")
             self.canvas.itemconfigure(self.text, fill="black", text=self.value)
         else:
             self.canvas.itemconfigure(self.rectangle, fill="grey")
             self.canvas.itemconfigure(self.text, fill="white", text=self.value)
+        self.clicked = True
 
     def on_right_click(self, event):
         if self.clicked:

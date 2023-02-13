@@ -27,7 +27,7 @@ class Field:
 
     def game_over(self):
         middle_x = self.canvas.winfo_width() / 2
-        middle_y = self.canvas.winfo_height() / 2
+        middle_y = self.canvas.winfo_height() / 3
         self.canvas.create_text(middle_x, middle_y, text="GAME OVER!", font=("Helvetica", 70), fill="red")
         self.canvas.create_text(middle_x, middle_y + middle_y / 2, text="PRESS ENTER TO RETRY", font=("Helvetica", 30),
                                 fill="red")
