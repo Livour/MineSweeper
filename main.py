@@ -17,6 +17,7 @@ def on_key_press(event, field: Field):
 
 def main():
     frame = Tk()
+    frame.title("OurSweeper")
     canvas = Canvas(frame, width=WIDTH, height=HEIGHT)
     canvas.pack()
 
