@@ -1,11 +1,12 @@
 from tkinter import Canvas
+from tkinter.font import Font
 
 from field_util import is_valid
 
 
 class Cell:
     FLAG = "🏴"
-    MINE = "💣"
+    MINE = "X"
 
     def __init__(self, canvas: Canvas, row, column, cell_size, value, matrix, rows, columns):
         self.clicked = False
@@ -21,7 +22,8 @@ class Cell:
         x2 = x1 + cell_size
         y2 = y1 + cell_size
         self.rectangle = canvas.create_rectangle(x1, y1, x2, y2, fill="white")
-        self.text = canvas.create_text(x1 + cell_size / 2, y1 + cell_size / 2, text='', fill='white')
+        self.text = canvas.create_text(x1 + cell_size / 2, y1 + cell_size / 2, text='', fill='white',
+                                       font=Font(None, f"Helvetica {cell_size - 2}"))
         left_click_handler = lambda event, i=row, j=column: self.on_click(event, i, j)
         right_click_handler = lambda event: self.on_right_click(event)
 
