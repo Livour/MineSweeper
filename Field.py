@@ -2,6 +2,8 @@ from Cell import Cell
 from field_util import generate_field
 from tkinter import Canvas, DISABLED
 
+from zoom_util import reset_zoom
+
 
 class Field:
     NUM_OF_MINES = 500
@@ -15,6 +17,8 @@ class Field:
         self.new_game()
 
     def new_game(self):
+        reset_zoom()
+        self.canvas.delete("all")
         logic_matrix = generate_field(self.rows, self.columns, self.NUM_OF_MINES)
         self.matrix = []
         for i in range(self.rows):
