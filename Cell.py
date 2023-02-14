@@ -51,7 +51,7 @@ class Cell:
             self.canvas.itemconfigure(self.text, fill="black", text=self.value)
         else:
             self.canvas.itemconfigure(self.rectangle, fill="grey")
-            self.canvas.itemconfigure(self.text, fill="white", text=self.value)
+            self.canvas.itemconfigure(self.text, fill="white", text="" if self.value == 0 else self.value)
         self.clicked = True
 
     def on_right_click(self, event):
