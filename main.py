@@ -15,6 +15,14 @@ def on_key_press(event, field: Field):
         field.new_game()
 
 
+def on_canvas_press(event, canvas: Canvas):
+    canvas.scan_mark(event.x, event.y)
+
+
+def on_canvas_drag(event, canvas: Canvas):
+    canvas.scan_dragto(event.x, event.y, gain=1)
+
+
 def main():
     frame = Tk()
     frame.title("OurSweeper")
@@ -25,6 +33,8 @@ def main():
 
     frame.bind("<Key>", lambda event: on_key_press(event, field))
     frame.bind("<MouseWheel>", lambda event: zoom(event, canvas))
+    frame.bind("<ButtonPress-2>", lambda event: on_canvas_press(event, canvas))
+    frame.bind("<B2-Motion>", lambda event: on_canvas_drag(event, canvas))
     frame.mainloop()
 
 
