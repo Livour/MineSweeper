@@ -26,8 +26,10 @@ def reset_zoom():
     current_zoom = 1.0
 
 
-def zoom(event, canvas):
+def zoom(event, field):
+    if field.is_game_over:
+        return
     if event.delta > 0:
-        zoom_in(event, canvas)
+        zoom_in(event, field.canvas)
     elif event.delta < 0:
-        zoom_out(event, canvas)
+        zoom_out(event, field.canvas)

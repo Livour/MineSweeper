@@ -9,6 +9,7 @@ class Field:
     NUM_OF_MINES = 500
 
     def __init__(self, canvas: Canvas, rows, columns, cell_size):
+        self.is_game_over = None
         self.matrix = None
         self.canvas = canvas
         self.rows = rows
@@ -19,6 +20,7 @@ class Field:
     def new_game(self):
         reset_zoom()
         self.canvas.delete("all")
+        self.is_game_over = False
         logic_matrix = generate_field(self.rows, self.columns, self.NUM_OF_MINES)
         self.matrix = []
         for i in range(self.rows):
@@ -30,11 +32,14 @@ class Field:
                 self.matrix[i].append(cell)
 
     def game_over(self):
+        self.is_game_over = True
         middle_x = self.canvas.winfo_width() / 2
         middle_y = self.canvas.winfo_height() / 3
-        self.canvas.create_text(middle_x, middle_y, text="GAME OVER!", font=("Helvetica", 70), fill="red")
-        self.canvas.create_text(middle_x, middle_y + middle_y / 2, text="PRESS ENTER TO RETRY", font=("Helvetica", 30),
+        self.canvas.create_text(middle_x, middle_y, text="GAME OVER!", font=("Helvetica", 70),
                                 fill="red")
+        self.canvas.create_text(middle_x, middle_y + middle_y / 1.1, text="PRESS ENTER TO RETRY",
+                                font=("Helvetica", 30),
+                                fill="red", )
 
         for item in self.canvas.find_all():
             self.canvas.itemconfigure(item, state=DISABLED)
