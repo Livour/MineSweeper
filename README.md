@@ -1,4 +1,4 @@
 # MineSweeper
-Basic Minesweeper Game name "OurSweeper"
+Basic Minesweeper Game named "OurSweeper"
 
 Built using Python Tkinter
